@@ -1,0 +1,182 @@
+/* Ensure full-screen background */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Main container */
+main {
+  display: flex;
+  width: 90vw;
+  height: 90vh;
+  overflow: hidden;
+  position: relative;
+  gap: 20px;
+}
+
+/* Left section (Editor) */
+.left {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #130c0d, #1e1619);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 30px;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 15px;
+}
+
+/* Right section (Output) */
+.right {
+  width: 50%;
+  height: 100%;
+  background: #1e1619;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  overflow-y: auto;
+  color: white;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+
+/* Headings for Left and Right Sections */
+.heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffcc00; /* Bright yellow color */
+  text-align: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* Code editor styling */
+.code {
+  width: 100%;
+  max-width: 100%;
+  background: transparent !important;
+}
+
+/* Remove any default styling from react-simple-code-editor */
+textarea, pre {
+  background: transparent !important;
+  color: white !important;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Button Styles */
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  min-width: 120px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Review Button */
+.review {
+  background-color: #ff477e;
+  color: white;
+}
+
+.review:hover {
+  background-color: #ff2a65;
+}
+
+/* Copy & Paste Buttons */
+.copy {
+  background-color: #4285f4;
+  color: white;
+}
+
+.copy:hover {
+  background-color: #3167c4;
+}
+
+.paste {
+  background-color: #34a853;
+  color: white;
+}
+
+.paste:hover {
+  background-color: #22863a;
+}
+
+/* Loading Screen */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+  }
+
+  .left, .right {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .button-container {
+    bottom: 15px;
+    left: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

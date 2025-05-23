@@ -6,7 +6,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://your-vercel-app.vercel.app'], // Add your vercel domain later
+    origin: ['http://localhost:3000', 'https://code-reviewer-ximg.vercel.app/'], // Add your vercel domain later
     credentials: true
 }));
 app.use(express.json({ limit: "50mb" }));

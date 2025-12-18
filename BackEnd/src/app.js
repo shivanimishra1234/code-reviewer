@@ -1,30 +1,21 @@
-// const express = require('express');
-// const aiRoutes = require("./routes/ai.routes")
-
-// const app = express()
-
-// app.get('/', (req, res) => {
-//     res.send('Hello, World!');
-// });
-
-// app.use("/ai", aiRoutes);
-
-// module.exports = app
-
-
 import express from 'express';
-import aiRoutes from './routes/ai.routes.js';  // Ensure the correct path with `.js`
-//app.use(express.json())
-import cors from 'cors'
-
+import aiRoutes from './routes/ai.routes.js';
+import cors from 'cors';
 
 const app = express();
-app.use(cors())
 
-app.use(express.json({limit: "50mb"}));
+// Middleware
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://code-reviewer-ximg.vercel.app'] 
+        : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8000'],
+    credentials: true
+}));
+app.use(express.json({ limit: "50mb" }));
 
-app.post('/', (req, res) => {
-    res.send('Hello, World!');
+// Routes
+app.get('/', (req, res) => {
+    res.send('Hello, World! Backend is running.');
 });
 
 app.use("/ai", aiRoutes);

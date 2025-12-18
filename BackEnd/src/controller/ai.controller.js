@@ -12,19 +12,24 @@
 
 import generateContent from "../services/ai.service.js";
 
- export const getReview = async(req, res) => {
+export const getReview = async(req, res) => {
     try{
-        const {code} = req.body;  // FIXED
-        console.log("test")
+        const {code} = req.body;
+        console.log("Received code review request");
+        console.log("Code length:", code?.length);
 
         if (!code) {
-            return res.status(400).send('Please provide a prompt.');
+            return res.status(400).json({"error": 'Please provide code to review.'});
         }
+        
+        console.log("Calling AI service...");
         const response = await generateContent(code);
+        console.log("AI response received, length:", response?.length);
         res.status(200).json({"response":response});
     }
     catch(error){
-        console.log(error.message);
-        res.status(400).json({"error": error.message});
+        console.error("Controller Error:", error.message);
+        console.error("Full error:", error);
+        res.status(500).json({"error": error.message});
     }
 }

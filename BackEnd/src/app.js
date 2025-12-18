@@ -7,7 +7,7 @@ const app = express();
 // Middleware
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
-        ? ['https://code-reviewer-ximg.vercel.app'] 
+        ? ['https://code-reviewer-lovat-beta.vercel.app/'] 
         : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8000'],
     credentials: true
 }));

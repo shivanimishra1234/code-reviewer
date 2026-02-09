@@ -9,7 +9,8 @@ app.use(cors({
   origin: [
     'https://code-reviewer-lovat-beta.vercel.app',
     'http://localhost:5173',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://code-reviewer-ximg.vercel.app'
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
 }));

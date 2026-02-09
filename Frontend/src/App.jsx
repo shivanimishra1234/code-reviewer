@@ -7,25 +7,30 @@ import axios from "axios";
 import Editor from "react-simple-code-editor";
 import ReactMarkdown from "react-markdown";
 
+// ✅ READ API BASE URL FROM ENV
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function App() {
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState(`// Write your code here...`);
-  const [review, setReview] = useState(""); // Stores AI review output
+  const [review, setReview] = useState("");
 
   useEffect(() => {
-    Prism.highlightAll(); // Ensure Prism runs after component mounts
+    Prism.highlightAll();
   }, []);
 
-  // Function to handle code review
   async function reviewCode() {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/ai/get-review", { code });
+      const response = await axios.post(
+        `${API_BASE_URL}/ai/get-review`,
+        { code }
+      );
 
-      console.log("API Response:", response.data); // Debugging
+      console.log("API Response:", response.data);
 
-      if (response.data && response.data.response) {
-        setReview(response.data.response); // Set the reviewed response
+      if (response.data?.response) {
+        setReview(response.data.response);
       } else {
         setReview("No response received.");
       }
@@ -37,13 +42,11 @@ function App() {
     }
   }
 
-  // Function to copy code to clipboard
   function copyToClipboard() {
     navigator.clipboard.writeText(code);
     alert("Code copied!");
   }
 
-  // Function to paste code from clipboard
   async function pasteFromClipboard() {
     const text = await navigator.clipboard.readText();
     setCode(text);
@@ -58,13 +61,12 @@ function App() {
         </div>
       ) : (
         <main>
-          {/* Left Section (Code Editor) */}
           <div className="left">
             <h2 className="heading">✍️ Write & Paste Your Code Here</h2>
             <div className="code">
               <Editor
                 value={code}
-                onValueChange={(code) => setCode(code)}
+                onValueChange={setCode}
                 highlight={(code) =>
                   Prism.highlight(code, Prism.languages.javascript, "javascript")
                 }
@@ -77,13 +79,11 @@ function App() {
                   minHeight: "200px",
                   width: "100%",
                   overflowX: "auto",
-                  wordWrap: "break-word",
                   background: "transparent",
                 }}
               />
             </div>
 
-            {/* Button Container */}
             <div className="button-container">
               <button className="copy" onClick={copyToClipboard}>
                 Copy Code
@@ -97,11 +97,12 @@ function App() {
             </div>
           </div>
 
-          {/* Right Section (Review Output) */}
           <div className="right">
             <h2 className="heading">🔍 Your AI Review Response</h2>
             <div className="markdown-output">
-              <ReactMarkdown>{review || "Waiting for review..."}</ReactMarkdown>
+              <ReactMarkdown>
+                {review || "Waiting for review..."}
+              </ReactMarkdown>
             </div>
           </div>
         </main>
@@ -111,4 +112,3 @@ function App() {
 }
 
 export default App;
-// ̥r̥r̥

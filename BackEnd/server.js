@@ -2,13 +2,16 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+//console.log("GROQ KEY:", process.env.GROQ_API_KEY);
+
+
 console.log('Environment variables loaded');
-console.log('API Key present:', !!process.env.GOOGLE_GEMINI_KEY);
-console.log('API Key length:', process.env.GOOGLE_GEMINI_KEY?.length);
+// console.log('API Key present:', !!process.env.GOOGLE_GEMINI_KEY);
+// console.log('API Key length:', process.env.GOOGLE_GEMINI_KEY?.length);
 
 // Validate critical environment variables before importing app
-if (!process.env.GOOGLE_GEMINI_KEY) {
-    console.error('ERROR: GOOGLE_GEMINI_KEY is not defined in .env file');
+if (!process.env.GROQ_API_KEY) {
+    console.error('ERROR: GROQ_API_KEY is not defined in .env file');
     process.exit(1);
 }
 

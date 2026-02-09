@@ -6,18 +6,21 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? ['https://code-reviewer-lovat-beta.vercel.app/'] 
-        : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8000'],
-    credentials: true
+  origin: [
+    'https://code-reviewer-lovat-beta.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
 }));
+
 app.use(express.json({ limit: "50mb" }));
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('Hello, World! Backend is running.');
+  res.send('Hello, World! Backend is running.');
 });
 
-app.use("/ai", aiRoutes);
+app.use('/ai', aiRoutes);
 
 export default app;
